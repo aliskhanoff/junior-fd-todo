@@ -16,7 +16,9 @@ exports.up = function(knex) {
          table.string('avatar_url', 64);
          table.string('email',    128).notNullable().unique();
          table.string('password', 256).notNullable();
-         
+         table.boolean('is_confirmed').notNullable().defaultsTo(false);
+         table.boolean('is_deactivated').notNullable().defaultsTo(false);
+
          table.integer('role_id').references("id").inTable("roles") .defaultsTo(1);
          table.timestamps(true, true);
       })

@@ -14,22 +14,10 @@ module.exports = {
     }
   },
 
-  staging: {
-
-    client: 'sqlite3',
-    connection: {
-      filename: './data/production.sqlite3'
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
-
-  },
-
   production: {
-    client: 'sqlite3',
+    client: 'pg',
     connection: {
-      filename: './data/production.sqlite3'
+      
     },
     migrations: {
       tableName: 'knex_migrations'

@@ -2,6 +2,7 @@ const fastify = require('fastify')()
 const path    = require("path")
 const knex    = require('knex')(require('./knexfile')['development']);
 const users   = require('./api/users/auth');
+const register = require('./api/users/register');
 
 const PORT    = process.env.PORT || 3000;
 
@@ -22,6 +23,7 @@ const PORT    = process.env.PORT || 3000;
 
   //default routes
   users(fastify)
+  register(fastify)
     .get('/protect/xsrf', (req, reply) => {
       return reply.generateCsrf();
     })
