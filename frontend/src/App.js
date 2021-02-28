@@ -1,10 +1,11 @@
 import React from 'react';
+import { ConfigRoutes } from './pages';
 
 const App = () => {
 
   return (
     <div className="__app">
-      Hello world
+        <ConfigRoutes />
     </div>
   );
 }

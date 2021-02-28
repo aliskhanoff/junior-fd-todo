@@ -4,18 +4,29 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "debug": "nodemon index.js"
+    "build-db": "npx knex migrate:latest",
+    "build": "npx knex migrate:up",
+    "debug": "nodemon -r dotenv/config index.js",
+    "start-node": "node -r dotenv/config index.js",
+    "start": "run-s build-db start-node"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "fastify": "^3.12.0",
+    "fastify-cookie": "^5.1.0",
     "fastify-cors": "^5.2.0",
     "fastify-csrf": "^3.0.1",
     "fastify-formbody": "^5.0.0",
     "fastify-jwt": "^2.3.0",
     "fastify-knexjs": "^1.1.0",
+    "fastify-nodemailer": "^5.0.0",
     "fastify-static": "^4.0.1",
     "knex": "^0.21.18",
     "nodemon": "^2.0.7",
-    "sqlite3": "^5.0.2"
+    "pg": "^8.5.1",
+    "sqlite3": "5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }

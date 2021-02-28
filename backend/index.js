@@ -1,32 +1,34 @@
 const fastify = require('fastify')()
-const PORT = process.env.PORT || 3000;
+const path    = require("path")
+const knex    = require('knex')(require('./knexfile')['development']);
+const users   = require('./api/users/auth');
 
-const path = require("path")
-const knex = require('knex');
+const PORT    = process.env.PORT || 3000;
 
-fastify.knex = knex;
-fastify.knex.connect = () => knex(require('./knexfile').development);
+  //knex modules
+  fastify.knex  = knex;
 
-fastify
-  .register(require('fastify-formbody'))
-  .register(require('fastify-static'), {
-    root: path.join(__dirname, '../frontend/build'),
-    prefix: '/', // optional: default '/'
-  })
+  fastify
+  
+    .register(require('fastify-jwt'), {  secret: process.env.TOKEN_SECRET || 12345 })
+    .register(require('fastify-cookie'), { secret: process.env.COOKIE_SECRET }) // See following section to ensure security
+    .register(require('fastify-csrf'), { cookieOpts: { signed: true } })
+    .register(require('fastify-formbody'))
+    .register(require('fastify-static'), {
+      root: path.join(__dirname, '../frontend/build'),
+      prefix: '/', // optional: default '/'
+    });
 
-  .get('/hello', (req, reply) => {
-    reply.send({ message: "hello" })
-  })
 
-  //login path
-  .post('/login', (req, reply) => {
-    reply.send({ hello: 'login' })
-  })
+  //default routes
+  users(fastify)
+    .get('/protect/xsrf', (req, reply) => {
+      return reply.generateCsrf();
+    })
+    // .post('/protect/token', (req, reply) => {
+    //   return fastify.jwt.sign({ hello: "world" });
+    // })
 
-  //register path
-  .post('/register', (req, reply) => {
-    reply.send({ hello: 'register' })
-  })
 
 
 .listen(PORT)

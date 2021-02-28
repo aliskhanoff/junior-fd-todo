@@ -1,4 +1,3 @@
-  
 {
   "name": "@junior-fd/fullstack-todo",
   "version": "1.0.0",
@@ -11,20 +10,21 @@
     "frontend",
     "backend"
   ],
+  "engines": {
+    "node": "14.15.x",
+    "yarn": "1.22.x"
+  },
   "scripts": {
+    "start": "yarn stb",
     "stf": "yarn --cwd ./frontend/ start",
     "stb": "yarn --cwd ./backend/ start",
     "sta": "concurrently \"yarn --cwd ~/frontend/ start\" \"yarn --cwd ~/frontend/ backend\"",
-    
     "deb": "yarn --cwd ./backend/ debug",
-
     "buf": "yarn --cwd ./frontend/ build",
     "bub": "yarn --cwd ./backend/  build",
     "bur": "run-s buf cof deb",
-    
     "clf": "rimraf ./frontend/build",
     "clb": "rimraf ./backend/public",
-    
     "coa": "copy-files-from-to",
     "cof": "run-s clb coa"
   },
