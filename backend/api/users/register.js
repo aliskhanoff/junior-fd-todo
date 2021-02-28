@@ -1,5 +1,5 @@
 //authentication via jwt token
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const handle = (fastify, req, reply) => {
 
         const { identifier, password, first_name, last_name, third_name} = req.body;
