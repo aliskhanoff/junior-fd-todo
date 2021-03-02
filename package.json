@@ -18,7 +18,7 @@
     "start": "yarn stb",
     "stf": "yarn --cwd ./frontend/ start",
     "stb": "yarn --cwd ./backend/ start",
-    "sta": "concurrently \"yarn --cwd ~/frontend/ start\" \"yarn --cwd ~/frontend/ backend\"",
+    "sta": "concurrently \"yarn --cwd ~/frontend/ start\" \"yarn --cwd ~/backend/ debug\"",
     "deb": "yarn --cwd ./backend/ debug",
     "buf": "yarn --cwd ./frontend/ build",
     "bub": "yarn --cwd ./backend/  build",
